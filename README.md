@@ -1,4 +1,4 @@
-# Sample Action bar items Plugin
+# Session Share Plugin
 
 ## What is it?
 
@@ -36,3 +36,4 @@ npm start
     - name: SessionSharePlugin
       url: http://127.0.0.1:4701/static/SessionSharePlugin.js
 ```
+
