@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useEffect } from 'react';
 
 import {
-  ActionsBarButton, ActionsBarInterface, ActionsBarPosition, ActionsBarSeparator,
-  BbbPluginSdk, GraphqlResponseWrapper, PluginApi, UsersBasicInfoResponseFromGraphqlWrapper 
+  ActionsBarButton, ActionsBarInterface, ActionsBarPosition,
+  ActionsBarSeparator, BbbPluginSdk, PluginApi,
 } from 'bigbluebutton-html-plugin-sdk';
 import { SessionSharePluginProps } from './types';
 import { ShareModal } from '../config-modal/modal';
@@ -29,9 +29,9 @@ function SessionSharePlugin({
           });
     const dropdownToUserListItem:
       ActionsBarInterface = new ActionsBarSeparator({
-          position: ActionsBarPosition.RIGHT,
-        });
-    
+        position: ActionsBarPosition.RIGHT,
+      });
+
     pluginApi.setActionsBarItems([dropdownToUserListItem, buttonToUserListItem]);
   }, []);
 
@@ -39,19 +39,21 @@ function SessionSharePlugin({
   const handleConfirm = async (shareType: string) => {
     let joinOptions = {};
 
-    if(shareType === 'inviteUsers') {
-      joinOptions = {fullName: null};
+    if (shareType === 'inviteUsers') {
+      joinOptions = { fullName: null };
     }
 
     const joinUrl = await pluginApi.getJoinUrl(joinOptions);
     setNewJoinUrl(joinUrl);
   };
 
-
   return (
-    <>
-      <ShareModal isOpen={isModalOpen} newJoinUrl={newJoinUrl} onClose={() => { setModalOpen(false); setNewJoinUrl(null); } } onConfirm={handleConfirm} />
-    </>
+    <ShareModal
+      isOpen={isModalOpen}
+      newJoinUrl={newJoinUrl}
+      onClose={() => { setModalOpen(false); setNewJoinUrl(null); }}
+      onConfirm={handleConfirm}
+    />
   );
 }
 
