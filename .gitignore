@@ -23,4 +23,10 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
-dist/
+dist
+debian/.debhelper/
+debian/debhelper-build-stamp
+debian/files
+debian/**/changelog.gz
+debian/**/md5sums
+debian/**/var/www/*
