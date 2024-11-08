@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -20,15 +19,15 @@ module.exports = {
     client: {
       overlay: false,
     },
-    onBeforeSetupMiddleware: (devServer) => {
+    setupMiddlewares: (middlewares, devServer) => {
       if (!devServer) {
         throw new Error('webpack-dev-server is not defined');
       }
-
-      // Serve manifest.json from the project root when requested at /manifest.json
+      // Serve manifest.json directly from the project root
       devServer.app.get('/manifest.json', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'manifest.json'));
       });
+      return middlewares;
     },
   },
   module: {
@@ -54,11 +53,4 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.tsx', '.ts'],
   },
-  plugins: [
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: 'manifest.json', to: './' }, // Copy manifest.json to static/ in the output folder
-      ],
-    }),
-  ],
 };
