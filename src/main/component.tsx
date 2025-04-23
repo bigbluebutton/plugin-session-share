@@ -20,7 +20,9 @@ function SessionSharePlugin({
   useEffect(() => {
     const buttonToUserListItem:
           ActionsBarInterface = new ActionsBarButton({
-            icon: 'add',
+            icon: {
+              iconName: 'add',
+            },
             tooltip: 'Invite',
             onClick: () => {
               setModalOpen(true);
